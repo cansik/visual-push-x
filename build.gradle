@@ -5,18 +5,34 @@ buildscript {
     ext.kotlin_version = '1.2.21'
 
     repositories {
+        maven { url "https://mini2dx.org/maven/content/repositories/thirdparty" }
+        maven { url "https://mini2dx.org/maven/content/repositories/releases" }
         mavenCentral()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath group: 'org.mini2Dx', name: 'parcl', version: '1.2.1'
     }
 }
 
 apply plugin: 'kotlin'
-
 apply plugin: 'application'
+apply plugin: "org.mini2Dx.parcl"
+
 mainClassName = "ch.bildspur.visualpush.Main"
 applicationDefaultJvmArgs = ["-Djava.library.path=lib/video/macosx64:lib/syphon:lib/themidibus"]
+
+parcl {
+    app {
+        vmArgs = ["-Djava.library.path=lib/video/macosx64:lib/syphon:lib/themidibus"]
+        appName = "VisualPushX"
+        icon = "icons/icon.icns"
+        applicationCategory = "public.app-category.tools"
+        displayName = 'Visual Push X'
+        identifier = 'ch.bildspur.visualpushx'
+        copyright = 'Copyright 2018 bildspur'
+    }
+}
 
 repositories {
     mavenCentral()
