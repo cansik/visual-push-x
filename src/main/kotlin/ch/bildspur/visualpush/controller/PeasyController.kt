@@ -8,7 +8,7 @@ import processing.core.PGraphics
 /**
  * Created by cansik on 08.06.17.
  */
-class PeasyController(internal var sketch: PApplet) {
+class PeasyController(private var sketch: PApplet) {
     lateinit var cam: PeasyCam
 
     fun setup() {

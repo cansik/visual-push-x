@@ -11,6 +11,7 @@ import ch.bildspur.visualpush.util.format
 import ch.bildspur.visualpush.view.IRenderer
 import ch.bildspur.visualpush.view.SceneRenderer
 import ch.bildspur.postfx.builder.PostFX
+import ch.bildspur.visualpush.controller.SyphonController
 import processing.core.PApplet
 import processing.core.PConstants
 import processing.core.PGraphics
@@ -73,6 +74,8 @@ class Sketch : PApplet() {
 
     val peasy = PeasyController(this)
 
+    val syphon = SyphonController(this)
+
     val timer = Timer()
 
     lateinit var canvas: PGraphics
@@ -115,6 +118,7 @@ class Sketch : PApplet() {
 
         fx = PostFX(this)
         peasy.setup()
+        syphon.setup()
 
         // timer for cursor hiding
         timer.addTask(TimerTask(CURSOR_HIDING_TIME, {
@@ -158,12 +162,14 @@ class Sketch : PApplet() {
         // add hud
         peasy.hud {
             // output image
-            if (project.value.highResMode.value)
+            if (project.value.highResMode.value) {
                 fx.render(canvas)
                         .bloom(0.0f, 20, 40f)
-                        .compose()
-            else
-                image(canvas, 0f, 0f)
+                        .compose(canvas)
+            }
+
+            image(canvas, 0f, 0f)
+            syphon.sendImage(canvas)
             drawFPS(g)
         }
     }
