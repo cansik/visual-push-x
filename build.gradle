@@ -49,9 +49,8 @@ dependencies {
     compile group: 'org.jogamp.jogl', name: 'jogl-all-main', version: '2.3.2'
     compile group: 'org.jogamp.gluegen', name: 'gluegen-rt-main', version: '2.3.2'
 
-    // processing libraries
+    // post fx
     compile files('lib/postfx/PostFX.jar')
-    compile files('lib/peasycam/peasycam.jar')
 
     // midibus
     compile files('lib/themidibus/themidibus.jar')

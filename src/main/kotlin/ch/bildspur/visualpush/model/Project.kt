@@ -31,5 +31,15 @@ class Project {
     var fullScreenDisplay = DataModel(0)
 
     @Expose
+    @IntParameter("Output Width")
+    var outputWidth = DataModel(1280)
+
+    @Expose
+    @IntParameter("Output Height")
+    var outputHeight = DataModel(720)
+
+    @Expose
     var grid = Grid()
+
+
 }

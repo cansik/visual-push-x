@@ -1,17 +1,14 @@
 package ch.bildspur.visualpush
 
-import ch.bildspur.visualpush.controller.PeasyController
 import ch.bildspur.visualpush.controller.timer.Timer
 import ch.bildspur.visualpush.controller.timer.TimerTask
 import ch.bildspur.visualpush.model.DataModel
 import ch.bildspur.visualpush.model.Project
-import ch.bildspur.visualpush.util.LogBook
-import ch.bildspur.visualpush.util.draw
-import ch.bildspur.visualpush.util.format
 import ch.bildspur.visualpush.view.IRenderer
 import ch.bildspur.visualpush.view.SceneRenderer
 import ch.bildspur.postfx.builder.PostFX
 import ch.bildspur.visualpush.controller.SyphonController
+import ch.bildspur.visualpush.util.*
 import processing.core.PApplet
 import processing.core.PConstants
 import processing.core.PGraphics
@@ -29,7 +26,7 @@ class Sketch : PApplet() {
         val LOW_RES_FRAME_RATE = 30f
 
         @JvmStatic
-        val WINDOW_WIDTH = 768
+        val WINDOW_WIDTH = 1024
         @JvmStatic
         val WINDOW_HEIGHT = 576
 
@@ -59,20 +56,14 @@ class Sketch : PApplet() {
     }
 
     @Volatile
-    var isInitialised = false
+    private var isInitialised = false
 
     var fpsOverTime = 0f
-
-    var isStatusViewShown = false
 
     @Volatile
     var isResetRendererProposed = false
 
     var isRendering = DataModel(true)
-
-    var isInteractionOn = DataModel(true)
-
-    val peasy = PeasyController(this)
 
     val syphon = SyphonController(this)
 
@@ -95,7 +86,7 @@ class Sketch : PApplet() {
         if (project.value.isFullScreenMode.value)
             fullScreen(PConstants.P3D, project.value.fullScreenDisplay.value)
         else
-            size(WINDOW_WIDTH, WINDOW_HEIGHT, PConstants.P3D)
+            size(WINDOW_WIDTH, WINDOW_HEIGHT, PConstants.P2D)
 
         PJOGL.profile = 1
         smooth()
@@ -117,7 +108,6 @@ class Sketch : PApplet() {
         project.fire()
 
         fx = PostFX(this)
-        peasy.setup()
         syphon.setup()
 
         // timer for cursor hiding
@@ -155,23 +145,18 @@ class Sketch : PApplet() {
             // render (update timer)
             if (isRendering.value)
                 timer.update()
-
-            peasy.applyTo(canvas)
         }
 
-        // add hud
-        peasy.hud {
-            // output image
-            if (project.value.highResMode.value) {
-                fx.render(canvas)
-                        .bloom(0.0f, 20, 40f)
-                        .compose(canvas)
-            }
-
-            image(canvas, 0f, 0f)
-            syphon.sendImage(canvas)
-            drawFPS(g)
+        // output image
+        if (project.value.highResMode.value) {
+            fx.render(canvas)
+                    .bloom(0.0f, 20, 40f)
+                    .compose(canvas)
         }
+
+        g.centerImage(canvas)
+        syphon.sendImage(canvas)
+        drawFPS(g)
     }
 
     fun onProjectChanged() {
@@ -191,7 +176,7 @@ class Sketch : PApplet() {
     }
 
     fun resetRenderer() {
-        println("reseting renderer...")
+        println("resetting renderer...")
 
         renderer.forEach {
             timer.taskList.remove(it.timerTask)
@@ -214,22 +199,22 @@ class Sketch : PApplet() {
     }
 
     fun resetCanvas() {
-        canvas = createGraphics(WINDOW_WIDTH, WINDOW_HEIGHT, PConstants.P3D)
+        canvas = createGraphics(project.value.outputWidth.value, project.value.outputHeight.value, PConstants.P2D)
 
         // retina screen
+        /*
         if (project.value.highResMode.value)
             canvas.pixelDensity = 2
+        */
     }
 
     fun skipFirstFrames(): Boolean {
         // skip first two frames
         if (frameCount < 2) {
-            peasy.hud {
-                textAlign(CENTER, CENTER)
-                fill(255)
-                textSize(20f)
-                text("${Sketch.NAME} is loading...", width / 2f, height / 2f)
-            }
+            textAlign(CENTER, CENTER)
+            fill(255)
+            textSize(20f)
+            text("${Sketch.NAME} is loading...", width / 2f, height / 2f)
             return true
         }
 

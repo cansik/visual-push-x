@@ -12,13 +12,12 @@ class SceneRenderer(val g: PGraphics, val project : Project) : IRenderer {
 
 
     override fun setup() {
-        g.draw {
-            it.background(55)
-        }
     }
 
     override fun render() {
-
+        g.draw {
+            it.background(0f, 120f, 255f)
+        }
     }
 
     override fun dispose() {
