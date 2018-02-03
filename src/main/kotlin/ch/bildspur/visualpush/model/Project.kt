@@ -29,4 +29,7 @@ class Project {
     @Expose
     @IntParameter("Fullscreen Display*")
     var fullScreenDisplay = DataModel(0)
+
+    @Expose
+    var grid = Grid()
 }

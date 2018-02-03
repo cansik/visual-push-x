@@ -9,12 +9,14 @@ import ch.bildspur.visualpush.ui.properties.PropertiesControl
 import ch.bildspur.visualpush.ui.util.UITask
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
+import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.ProgressIndicator
 import javafx.scene.control.TitledPane
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.layout.BorderPane
+import javafx.scene.layout.GridPane
 import javafx.stage.FileChooser
 import javafx.stage.Stage
 import processing.core.PApplet
@@ -39,6 +41,8 @@ class PrimaryView {
     lateinit var sketch: Sketch
 
     lateinit var processingThread: Thread
+
+    @FXML lateinit var gridPane : GridPane
 
     @FXML lateinit var propertiesPane: TitledPane
 
@@ -78,6 +82,15 @@ class PrimaryView {
                 project.value = configuration.loadProject(appConfig.projectFile)
             else
                 project.value = Project()
+
+            // setup grid
+            for (y in 0 until project.value.grid.height.value) {
+                for (x in 0 until project.value.grid.width.value) {
+                    gridPane.add(Button("hello"), x, y)
+                }
+            }
+
+            root.center = gridPane
 
             // start processing
             startProcessing()
