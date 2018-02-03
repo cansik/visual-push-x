@@ -36,25 +36,7 @@ dependencies {
     compile files('lib/processing/core/library/jogl-all-natives-macosx-universal.jar')
     compile files('lib/processing/core/library/jogl-all.jar')
 
-    compile files('lib/artnet/artnet4j.jar')
-
-    compile files('lib/LeapMotion/library/LeapJava.jar')
-    compile files('lib/LeapMotion/library/LeapMotion.jar')
-
-    compile files('lib/plugins/jmdns/jmdns-3.5.1.jar')
-    compile files('lib/plugins/jmdns/slf4j-api-1.7.21.jar')
-    compile files('lib/plugins/jmdns/slf4j-simple-1.7.21.jar')
-
-    compile files('lib/plugins/oscP5/oscP5.jar')
-
     compile files('lib/plugins/peasycam/peasycam.jar')
-
-    compile files('lib/plugins/minim/library/minim.jar')
-    compile files('lib/plugins/minim/library/jsminim.jar')
-    compile files('lib/plugins/minim/library/jl1.0.1.jar')
-    compile files('lib/plugins/minim/library/mp3spi1.9.5.jar')
-    compile files('lib/plugins/minim/library/tritonus_aos.jar')
-    compile files('lib/plugins/minim/library/tritonus_share.jar')
 }
 
 task fatJar(type: Jar) {

@@ -1,7 +1,7 @@
 package ch.bildspur.visualpush.model
 
+import ch.bildspur.visualpush.visual.Visual
 import com.google.gson.annotations.Expose
-import java.util.*
 import java.util.concurrent.atomic.AtomicReferenceArray
 
 class Grid {
@@ -12,7 +12,7 @@ class Grid {
     var height = DataModel(8)
 
     @Expose
-    lateinit var clips : AtomicReferenceArray<Objects>
+    lateinit var clips : AtomicReferenceArray<Visual>
 
     init {
         width.onChanged += {
@@ -27,6 +27,6 @@ class Grid {
 
     private fun createGrid()
     {
-        clips = AtomicReferenceArray<Objects>(width.value * height.value)
+        clips = AtomicReferenceArray(width.value * height.value)
     }
 }

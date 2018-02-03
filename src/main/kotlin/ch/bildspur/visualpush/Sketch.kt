@@ -11,7 +11,6 @@ import ch.bildspur.visualpush.util.format
 import ch.bildspur.visualpush.view.IRenderer
 import ch.bildspur.visualpush.view.SceneRenderer
 import ch.bildspur.postfx.builder.PostFX
-import ddf.minim.Minim
 import processing.core.PApplet
 import processing.core.PConstants
 import processing.core.PGraphics
@@ -83,8 +82,6 @@ class Sketch : PApplet() {
     val renderer = mutableListOf<IRenderer>()
 
     val project = DataModel(Project())
-
-    val minim = Minim(this)
 
     lateinit var fx: PostFX
 
