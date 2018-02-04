@@ -3,7 +3,7 @@ package ch.bildspur.visualpush.controller
 import ch.bildspur.visualpush.Sketch
 import codeanticode.syphon.SyphonServer
 import processing.core.PApplet
-import processing.core.PGraphics
+import processing.core.PImage
 
 class SyphonController(private val sketch: PApplet)
 {
@@ -11,13 +11,15 @@ class SyphonController(private val sketch: PApplet)
 
     fun setup() {
         server = SyphonServer(sketch, Sketch.NAME)
+        server.start()
     }
 
     fun sendScreen() {
         server.sendScreen()
     }
 
-    fun sendImage(p: PGraphics) {
-        server.sendImage(p)
+    fun sendImage(p: PImage) {
+        //if(server.hasClients())
+            server.sendImage(p)
     }
 }

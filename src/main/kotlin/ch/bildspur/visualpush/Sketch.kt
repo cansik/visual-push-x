@@ -154,7 +154,8 @@ class Sketch : PApplet() {
                     .compose(canvas)
         }
 
-        g.centerImage(canvas)
+        image(canvas, 0f, 0f)
+        //g.centerImage(canvas)
         syphon.sendImage(canvas)
         drawFPS(g)
     }
@@ -202,10 +203,8 @@ class Sketch : PApplet() {
         canvas = createGraphics(project.value.outputWidth.value, project.value.outputHeight.value, PConstants.P2D)
 
         // retina screen
-        /*
         if (project.value.highResMode.value)
-            canvas.pixelDensity = 2
-        */
+            pixelDensity = 2
     }
 
     fun skipFirstFrames(): Boolean {

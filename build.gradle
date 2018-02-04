@@ -58,7 +58,7 @@ dependencies {
 
     // syphon
     compile files('lib/syphon/jsyphon.jar')
-    compile files('lib/syphon/Syphon.jar')
+    //compile files('lib/syphon/Syphon.jar')
 
     // video
     compile files('lib/video/gst1-java-core-0.9.1.jar')
