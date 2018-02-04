@@ -5,10 +5,11 @@ import ch.bildspur.visualpush.controller.timer.TimerTask
 import ch.bildspur.visualpush.model.DataModel
 import ch.bildspur.visualpush.model.Project
 import ch.bildspur.visualpush.view.IRenderer
-import ch.bildspur.visualpush.view.SceneRenderer
+import ch.bildspur.visualpush.view.VisualRenderer
 import ch.bildspur.postfx.builder.PostFX
 import ch.bildspur.visualpush.controller.SyphonController
 import ch.bildspur.visualpush.util.*
+import ch.bildspur.visualpush.visual.VisualScheduler
 import processing.core.PApplet
 import processing.core.PConstants
 import processing.core.PGraphics
@@ -79,6 +80,8 @@ class Sketch : PApplet() {
 
     lateinit var fx: PostFX
 
+    val scheduler = VisualScheduler()
+
     init {
     }
 
@@ -108,7 +111,6 @@ class Sketch : PApplet() {
         project.fire()
 
         fx = PostFX(this)
-        syphon.setup()
 
         // timer for cursor hiding
         timer.addTask(TimerTask(CURSOR_HIDING_TIME, {
@@ -120,6 +122,11 @@ class Sketch : PApplet() {
         // timer for logbook
         timer.addTask(TimerTask(LOGBOOK_UPDATE_TIME, {
             // do nothing
+        }))
+
+        // timer for scheduler
+        timer.addTask(TimerTask(0, {
+            scheduler.update()
         }))
 
         LogBook.log("Start")
@@ -155,7 +162,6 @@ class Sketch : PApplet() {
         }
 
         image(canvas, 0f, 0f)
-        //g.centerImage(canvas)
         syphon.sendImage(canvas)
         drawFPS(g)
     }
@@ -187,7 +193,7 @@ class Sketch : PApplet() {
         renderer.clear()
 
         // add renderer
-        renderer.add(SceneRenderer(canvas, project.value))
+        renderer.add(VisualRenderer(canvas, project.value, scheduler))
 
         isResetRendererProposed = false
 
@@ -224,6 +230,8 @@ class Sketch : PApplet() {
         if (!isInitialised) {
             resetCanvas()
 
+            syphon.setup()
+            scheduler.setup()
             timer.setup()
 
             prepareExitHandler()

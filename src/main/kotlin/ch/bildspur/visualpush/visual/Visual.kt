@@ -9,6 +9,9 @@ import processing.core.PImage
 
 abstract class Visual {
     @Expose
+    var zIndex = DataModel(0)
+
+    @Expose
     var name = DataModel("Visual")
 
     @Expose
@@ -19,10 +22,17 @@ abstract class Visual {
 
     abstract val previewImage : PImage
 
+    abstract val frame : PImage
+
     /**
      * Loads the visual resources.
      */
     abstract fun init()
+
+    /**
+     * Updates every frame.
+     */
+    abstract fun update()
 
     /**
      * Plays the visual.
@@ -51,9 +61,4 @@ abstract class Visual {
         pause()
         reset()
     }
-
-    /**
-     * Renders the visual onto the context
-     */
-    abstract fun render(ctx : PGraphics)
 }

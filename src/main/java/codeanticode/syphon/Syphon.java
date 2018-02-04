@@ -101,9 +101,6 @@ public class Syphon {
      *
      */
     protected static void init() {
-        if (count == 0) {
-            System.out.println("##library.name## ##library.prettyVersion## by ##author##");
-        }
         count++;
     }
 
