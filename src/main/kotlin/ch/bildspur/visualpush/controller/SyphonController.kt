@@ -19,7 +19,7 @@ class SyphonController(private val sketch: PApplet)
     }
 
     fun sendImage(p: PImage) {
-        //if(server.hasClients())
+        if(server.hasClients())
             server.sendImage(p)
     }
 }
