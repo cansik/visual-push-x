@@ -30,7 +30,6 @@ class Main : Application() {
         primaryStage.setOnShown { controller.setupView() }
         primaryStage.setOnCloseRequest {
             controller.sketch.stop()
-            controller.processingThread.join(5000)
             System.exit(0)
         }
 

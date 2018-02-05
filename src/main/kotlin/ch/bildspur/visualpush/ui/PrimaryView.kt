@@ -40,8 +40,6 @@ class PrimaryView {
 
     lateinit var sketch: Sketch
 
-    lateinit var processingThread: Thread
-
     @FXML lateinit var gridPane : GridPane
 
     @FXML lateinit var propertiesPane: TitledPane
@@ -105,11 +103,7 @@ class PrimaryView {
         }
         project.fire()
 
-        processingThread = thread {
-            // run processing app
-            PApplet.runSketch(arrayOf("Sketch "), sketch)
-            println("processing quit")
-        }
+        sketch.run()
     }
 
     fun updateUI() {

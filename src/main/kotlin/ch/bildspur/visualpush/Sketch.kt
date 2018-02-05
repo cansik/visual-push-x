@@ -85,6 +85,11 @@ class Sketch : PApplet() {
     init {
     }
 
+    fun run()
+    {
+        super.runSketch()
+    }
+
     override fun settings() {
         if (project.value.isFullScreenMode.value)
             fullScreen(PConstants.P3D, project.value.fullScreenDisplay.value)
