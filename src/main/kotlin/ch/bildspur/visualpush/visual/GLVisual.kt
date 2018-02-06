@@ -20,9 +20,9 @@ class GLVisual(val applet: PApplet, val path : Path) : Visual() {
 
     override fun init() {
         movie = Movie(applet, path.toString())
-
         actualFrame = movie
-        generatePreview()
+
+        //generatePreview()
     }
 
     override fun update() {
@@ -46,16 +46,21 @@ class GLVisual(val applet: PApplet, val path : Path) : Visual() {
     }
 
     override fun dispose() {
+        movie.post()
         movie.dispose()
     }
 
     private fun generatePreview() {
+        // todo: fix preview generation
+        saveRead()
         movie.play()
         saveRead()
-        movie.jump(movie.time() / 2f)
+        println(movie.duration())
+        movie.jump(movie.duration() / 2f)
+        saveRead()
         saveRead()
         actualPreview = movie.copy()
-        movie.stop()
+        stop()
     }
 
     private fun saveRead() {

@@ -108,7 +108,7 @@ class PrimaryView {
         sketch.run()
 
         // add test data
-        project.value.grid.clips[0] = GLVisual(this.sketch, Paths.get("data/eye.mov"))
+        project.value.grid.clips[0] = GLVisual(this.sketch, Paths.get("data/eye.mp4"))
         project.value.grid.clips[0].playType.value = PlayType.LOOP
     }
 
