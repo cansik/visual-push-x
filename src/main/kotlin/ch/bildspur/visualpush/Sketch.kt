@@ -239,6 +239,8 @@ class Sketch : PApplet() {
             scheduler.setup()
             timer.setup()
 
+            initialiseClips()
+
             prepareExitHandler()
 
             // setting up renderer
@@ -249,6 +251,14 @@ class Sketch : PApplet() {
         }
 
         return false
+    }
+
+    fun initialiseClips()
+    {
+        project.value.grid.forEach { it.init() }
+
+        // todo remove test code
+        scheduler.play(project.value.grid.clips[0])
     }
 
     fun drawFPS(pg: PGraphics) {

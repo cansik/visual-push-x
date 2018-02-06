@@ -7,6 +7,8 @@ import ch.bildspur.visualpush.model.DataModel
 import ch.bildspur.visualpush.model.Project
 import ch.bildspur.visualpush.ui.properties.PropertiesControl
 import ch.bildspur.visualpush.ui.util.UITask
+import ch.bildspur.visualpush.visual.GLVisual
+import ch.bildspur.visualpush.visual.types.PlayType
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.Button
@@ -104,6 +106,10 @@ class PrimaryView {
         project.fire()
 
         sketch.run()
+
+        // add test data
+        project.value.grid.clips[0] = GLVisual(this.sketch, Paths.get("data/eye.mov"))
+        project.value.grid.clips[0].playType.value = PlayType.LOOP
     }
 
     fun updateUI() {

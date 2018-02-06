@@ -12,6 +12,17 @@ class VisualScheduler {
 
     fun update()
     {
+        visuals.forEach{ it.update() }
+    }
+
+    fun play(visual: Visual)
+    {
+        visual.play()
+        visuals.add(visual)
+    }
+
+    fun stop(visual: Visual)
+    {
 
     }
 }
