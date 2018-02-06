@@ -2,6 +2,8 @@ package ch.bildspur.visualpush.view
 
 import ch.bildspur.visualpush.controller.timer.TimerTask
 import ch.bildspur.visualpush.model.Project
+import ch.bildspur.visualpush.util.centerImage
+import ch.bildspur.visualpush.util.centerImageAdjusted
 import ch.bildspur.visualpush.util.draw
 import ch.bildspur.visualpush.visual.Visual
 import ch.bildspur.visualpush.visual.VisualScheduler
@@ -25,7 +27,7 @@ class VisualRenderer(val ctx: PGraphics, val project : Project, val scheduler: V
 
     private fun renderVisual(visual : Visual)
     {
-        ctx.image(visual.frame, 0f, 0f, ctx.width.toFloat(), ctx.height.toFloat())
+        ctx.centerImageAdjusted(visual.frame)
     }
 
     override fun dispose() {
