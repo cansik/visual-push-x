@@ -1,4 +1,4 @@
-package ch.bildspur.visualpush.view
+package ch.bildspur.visualpush.renderer
 
 import ch.bildspur.visualpush.controller.timer.TimerTask
 

@@ -4,19 +4,17 @@ import ch.bildspur.visualpush.controller.timer.Timer
 import ch.bildspur.visualpush.controller.timer.TimerTask
 import ch.bildspur.visualpush.model.DataModel
 import ch.bildspur.visualpush.model.Project
-import ch.bildspur.visualpush.view.IRenderer
-import ch.bildspur.visualpush.view.VisualRenderer
+import ch.bildspur.visualpush.renderer.IRenderer
+import ch.bildspur.visualpush.renderer.VisualRenderer
 import ch.bildspur.postfx.builder.PostFX
 import ch.bildspur.visualpush.controller.SyphonController
+import ch.bildspur.visualpush.effect.EffectRenderer
 import ch.bildspur.visualpush.util.*
 import ch.bildspur.visualpush.visual.VisualScheduler
 import processing.core.PApplet
 import processing.core.PConstants
 import processing.core.PGraphics
 import processing.opengl.PJOGL
-import processing.video.Movie
-
-
 
 
 /**
@@ -212,7 +210,8 @@ class Sketch : PApplet() {
         renderer.clear()
 
         // add renderer
-        renderer.add(VisualRenderer(canvas, project.value, scheduler))
+        val effectRenderer = EffectRenderer(this, project.value.outputWidth.value, project.value.outputHeight.value)
+        renderer.add(VisualRenderer(canvas, project.value, scheduler, effectRenderer))
 
         isResetRendererProposed = false
 
