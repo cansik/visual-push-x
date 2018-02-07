@@ -182,6 +182,17 @@ class Sketch : PApplet() {
     }
 
     fun setupHooks() {
+        project.value.grid.onVisualPlayed += {
+            scheduler.play(it.visual)
+        }
+
+        project.value.grid.onVisualPaused += {
+            scheduler.pause(it.visual)
+        }
+
+        project.value.grid.onVisualStopped += {
+            scheduler.stop(it.visual)
+        }
     }
 
     fun proposeResetRenderer() {
@@ -259,9 +270,6 @@ class Sketch : PApplet() {
     fun initialiseClips()
     {
         project.value.grid.forEach { it.init() }
-
-        // todo remove test code
-        scheduler.play(project.value.grid.clips[0])
     }
 
     fun drawFPS(pg: PGraphics) {

@@ -4,10 +4,17 @@ import ch.bildspur.visualpush.visual.Visual
 import javafx.scene.control.Label
 import javafx.scene.layout.Pane
 
-class VisualView(val visual : Visual) : Pane() {
+class VisualView(val visual : Visual) : EmptyView() {
+
 
     init {
-        val label = Label(visual.name.value)
-        children.add(label)
+        visual.name.onChanged += {
+            label.text = it
+        }
+        visual.name.fireLatest()
+
+        setOnMouseClicked {
+            println("play clip")
+        }
     }
 }

@@ -21,6 +21,10 @@ class VisualScheduler {
         visuals.add(visual)
     }
 
+    fun pause(visual: Visual) {
+
+    }
+
     fun stop(visual: Visual)
     {
 

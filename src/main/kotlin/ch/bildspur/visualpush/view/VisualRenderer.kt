@@ -9,7 +9,7 @@ import ch.bildspur.visualpush.visual.Visual
 import ch.bildspur.visualpush.visual.VisualScheduler
 import processing.core.PGraphics
 
-class VisualRenderer(val ctx: PGraphics, val project : Project, val scheduler: VisualScheduler) : IRenderer {
+class VisualRenderer(private val ctx: PGraphics, val project : Project, private val scheduler: VisualScheduler) : IRenderer {
     private val task = TimerTask(0, { render() }, "VisualRenderer")
     override val timerTask: TimerTask
         get() = task

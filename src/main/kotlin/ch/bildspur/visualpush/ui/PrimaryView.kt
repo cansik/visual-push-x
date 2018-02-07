@@ -5,13 +5,15 @@ import ch.bildspur.visualpush.configuration.ConfigurationController
 import ch.bildspur.visualpush.model.AppConfig
 import ch.bildspur.visualpush.model.DataModel
 import ch.bildspur.visualpush.model.Project
+import ch.bildspur.visualpush.model.visual.VisualGrid
+import ch.bildspur.visualpush.ui.control.EmptyView
+import ch.bildspur.visualpush.ui.control.VisualView
 import ch.bildspur.visualpush.ui.properties.PropertiesControl
 import ch.bildspur.visualpush.ui.util.UITask
 import ch.bildspur.visualpush.visual.GLVisual
 import ch.bildspur.visualpush.visual.types.PlayType
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
-import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.ProgressIndicator
 import javafx.scene.control.TitledPane
@@ -21,16 +23,15 @@ import javafx.scene.layout.BorderPane
 import javafx.scene.layout.GridPane
 import javafx.stage.FileChooser
 import javafx.stage.Stage
-import processing.core.PApplet
 import java.nio.file.Files
 import java.nio.file.Paths
-import kotlin.concurrent.thread
 
 
 class PrimaryView {
     lateinit var primaryStage: Stage
 
-    @FXML lateinit var root: BorderPane
+    @FXML
+    lateinit var root: BorderPane
 
     val configuration = ConfigurationController()
 
@@ -42,17 +43,24 @@ class PrimaryView {
 
     lateinit var sketch: Sketch
 
-    @FXML lateinit var gridPane : GridPane
+    @FXML
+    lateinit var gridPane: GridPane
 
-    @FXML lateinit var propertiesPane: TitledPane
+    @FXML
+    lateinit var propertiesPane: TitledPane
 
-    @FXML lateinit var statusLabel: Label
+    @FXML
+    lateinit var statusLabel: Label
 
-    @FXML lateinit var progressIndicator: ProgressIndicator
+    @FXML
+    lateinit var progressIndicator: ProgressIndicator
 
-    @FXML lateinit var iconView: ImageView
+    @FXML
+    lateinit var iconView: ImageView
 
     private val appIcon = Image(javaClass.getResourceAsStream("images/icon.png"))
+
+    private lateinit var grid : VisualGrid
 
     init {
     }
@@ -84,10 +92,13 @@ class PrimaryView {
                 project.value = Project()
 
             // setup grid
-            for (y in 0 until project.value.grid.height.value) {
-                for (x in 0 until project.value.grid.width.value) {
-                    gridPane.add(Button("hello"), x, y)
-                }
+            grid = project.value.grid
+            setupGrid()
+            project.value.grid.onVisualAdded += {
+                setupGrid()
+            }
+            project.value.grid.onVisualRemoved += {
+                setupGrid()
             }
 
             root.center = gridPane
@@ -97,19 +108,36 @@ class PrimaryView {
         }, { updateUI() }, "startup")
     }
 
+    fun setupGrid() {
+        gridPane.children.clear()
+        for (y in 0 until project.value.grid.height.value) {
+            for (x in 0 until project.value.grid.width.value) {
+                val visual = project.value.grid.get(x, y)
+
+                if (visual != null) {
+                    gridPane.add(VisualView(visual), x, y)
+                } else {
+                    gridPane.add(EmptyView(), x, y)
+                }
+            }
+        }
+    }
+
     fun startProcessing() {
         sketch = Sketch()
 
         project.onChanged += {
             sketch.project.value = project.value
+            grid = project.value.grid
         }
         project.fire()
 
         sketch.run()
 
         // add test data
-        project.value.grid.clips[0] = GLVisual(this.sketch, Paths.get("data/eye.mp4"))
-        project.value.grid.clips[0].playType.value = PlayType.LOOP
+        val testVisual = GLVisual(this.sketch, Paths.get("data/eye.mp4"))
+        testVisual.playType.value = PlayType.LOOP
+        project.value.grid.add(testVisual, 0, 0)
     }
 
     fun updateUI() {

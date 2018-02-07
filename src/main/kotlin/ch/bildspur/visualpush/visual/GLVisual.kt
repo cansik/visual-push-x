@@ -1,12 +1,13 @@
 package ch.bildspur.visualpush.visual
 
 import ch.bildspur.visualpush.visual.types.PlayType
+import com.google.gson.annotations.Expose
 import processing.core.PApplet
 import processing.core.PImage
 import processing.video.Movie
 import java.nio.file.Path
 
-class GLVisual(val applet: PApplet, val path : Path) : Visual() {
+class GLVisual(val applet: PApplet, @Expose val path : Path) : Visual() {
     private lateinit var movie: Movie
 
     private lateinit var actualPreview: PImage
