@@ -2,6 +2,7 @@ package ch.bildspur.visualpush.ui
 
 import ch.bildspur.visualpush.Sketch
 import ch.bildspur.visualpush.configuration.ConfigurationController
+import ch.bildspur.visualpush.effect.InvertEffect
 import ch.bildspur.visualpush.model.AppConfig
 import ch.bildspur.visualpush.model.DataModel
 import ch.bildspur.visualpush.model.Project
@@ -137,6 +138,8 @@ class PrimaryView {
         // add test data
         val testVisual = GLVisual(this.sketch, Paths.get("data/eye.mp4"))
         testVisual.playType.value = PlayType.LOOP
+        testVisual.effects.add(InvertEffect())
+
         project.value.grid.add(testVisual, 0, 0)
     }
 

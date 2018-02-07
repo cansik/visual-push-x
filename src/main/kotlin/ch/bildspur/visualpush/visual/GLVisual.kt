@@ -7,7 +7,7 @@ import processing.core.PImage
 import processing.video.Movie
 import java.nio.file.Path
 
-class GLVisual(val applet: PApplet, @Expose val path : Path) : Visual() {
+class GLVisual(private val applet: PApplet, @Expose val path : Path) : Visual() {
     private lateinit var movie: Movie
 
     private lateinit var actualPreview: PImage

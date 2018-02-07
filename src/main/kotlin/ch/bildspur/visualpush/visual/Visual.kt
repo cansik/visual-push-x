@@ -1,5 +1,6 @@
 package ch.bildspur.visualpush.visual
 
+import ch.bildspur.visualpush.effect.VisualEffect
 import ch.bildspur.visualpush.model.DataModel
 import ch.bildspur.visualpush.visual.types.BlendMode
 import ch.bildspur.visualpush.visual.types.PlayType
@@ -22,6 +23,9 @@ abstract class Visual {
 
     @Expose
     val isPlaying = DataModel(false)
+
+    @Expose
+    val effects = mutableListOf<VisualEffect>()
 
     abstract val previewImage : PImage
 
