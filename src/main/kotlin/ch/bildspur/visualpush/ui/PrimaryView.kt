@@ -115,7 +115,7 @@ class PrimaryView {
                 val visual = project.value.grid.get(x, y)
 
                 if (visual != null) {
-                    gridPane.add(VisualView(visual), x, y)
+                    gridPane.add(VisualView(grid, visual, x, y), x, y)
                 } else {
                     gridPane.add(EmptyView(), x, y)
                 }
