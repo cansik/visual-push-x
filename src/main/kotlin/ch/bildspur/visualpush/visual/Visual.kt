@@ -9,16 +9,19 @@ import processing.core.PImage
 
 abstract class Visual {
     @Expose
-    var zIndex = DataModel(0)
+    val zIndex = DataModel(0)
 
     @Expose
-    var name = DataModel("Visual")
+    val name = DataModel("Visual")
 
     @Expose
-    var playType = DataModel(PlayType.LOOP)
+    val playType = DataModel(PlayType.LOOP)
 
     @Expose
-    var blendMode = DataModel(BlendMode.BLEND)
+    val blendMode = DataModel(BlendMode.BLEND)
+
+    @Expose
+    val isPlaying = DataModel(false)
 
     abstract val previewImage : PImage
 
@@ -37,12 +40,18 @@ abstract class Visual {
     /**
      * Plays the visual.
      */
-    abstract fun play()
+    open fun play()
+    {
+        isPlaying.value = true
+    }
 
     /**
      * Pauses the visual.
      */
-    abstract fun pause()
+    open fun pause()
+    {
+        isPlaying.value = false
+    }
 
     /**
      * Resets the visual to it's starting point.

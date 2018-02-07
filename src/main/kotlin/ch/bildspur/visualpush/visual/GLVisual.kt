@@ -31,6 +31,7 @@ class GLVisual(val applet: PApplet, @Expose val path : Path) : Visual() {
     }
 
     override fun play() {
+        super.play()
         when (this.playType.value) {
             PlayType.LOOP -> movie.loop()
             PlayType.ONE_SHOT -> movie.play()
@@ -39,6 +40,7 @@ class GLVisual(val applet: PApplet, @Expose val path : Path) : Visual() {
     }
 
     override fun pause() {
+        super.pause()
         movie.pause()
     }
 

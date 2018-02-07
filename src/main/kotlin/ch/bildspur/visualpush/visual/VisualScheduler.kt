@@ -22,11 +22,12 @@ class VisualScheduler {
     }
 
     fun pause(visual: Visual) {
-
+        visual.pause()
     }
 
     fun stop(visual: Visual)
     {
-
+        visual.stop()
+        visuals.remove(visual)
     }
 }
