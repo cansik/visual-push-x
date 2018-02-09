@@ -12,6 +12,7 @@ import ch.bildspur.visualpush.ui.control.VisualView
 import ch.bildspur.visualpush.ui.properties.PropertiesControl
 import ch.bildspur.visualpush.ui.util.UITask
 import ch.bildspur.visualpush.visual.GLVisual
+import ch.bildspur.visualpush.visual.types.BlendMode
 import ch.bildspur.visualpush.visual.types.PlayType
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
@@ -139,6 +140,7 @@ class PrimaryView {
         val testVisual = GLVisual(this.sketch, Paths.get("data/eye.mp4"))
         testVisual.playType.value = PlayType.LOOP
         testVisual.effects.add(InvertEffect())
+        testVisual.blendMode.value = BlendMode.ADD
 
         project.value.grid.add(testVisual, 0, 0)
     }

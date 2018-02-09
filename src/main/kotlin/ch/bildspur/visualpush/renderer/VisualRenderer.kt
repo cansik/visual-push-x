@@ -24,7 +24,7 @@ class VisualRenderer(private val ctx: PGraphics,
 
     override fun render() {
         ctx.draw {
-            it.background(0f, 120f, 255f)
+            it.background(55f)
         }
 
         scheduler.visuals.forEach { renderVisual(it) }
