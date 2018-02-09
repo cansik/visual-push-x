@@ -1,12 +1,13 @@
 package ch.bildspur.visualpush.ui.control
 
+import ch.bildspur.visualpush.event.Event
 import ch.bildspur.visualpush.model.visual.VisualGrid
 import ch.bildspur.visualpush.visual.Visual
 import javafx.scene.control.Label
 import javafx.scene.layout.Pane
 
 class VisualView(val grid : VisualGrid, val visual : Visual, val x : Int, val y : Int) : EmptyView() {
-
+    val onVisualSelected = Event<Visual>()
 
     init {
         visual.name.onChanged += {
