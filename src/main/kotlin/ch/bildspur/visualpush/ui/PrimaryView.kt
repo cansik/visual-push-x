@@ -7,8 +7,8 @@ import ch.bildspur.visualpush.model.AppConfig
 import ch.bildspur.visualpush.model.DataModel
 import ch.bildspur.visualpush.model.Project
 import ch.bildspur.visualpush.model.visual.VisualGrid
-import ch.bildspur.visualpush.ui.control.EmptyView
-import ch.bildspur.visualpush.ui.control.VisualView
+import ch.bildspur.visualpush.ui.control.grid.EmptyView
+import ch.bildspur.visualpush.ui.control.grid.VisualView
 import ch.bildspur.visualpush.ui.properties.PropertiesControl
 import ch.bildspur.visualpush.ui.util.UITask
 import ch.bildspur.visualpush.visual.GLVisual

@@ -1,13 +1,14 @@
-package ch.bildspur.visualpush.ui.control
+package ch.bildspur.visualpush.ui.control.grid
 
 import ch.bildspur.visualpush.event.Event
 import ch.bildspur.visualpush.model.visual.VisualGrid
 import ch.bildspur.visualpush.visual.Visual
 import javafx.scene.control.Label
-import javafx.scene.layout.Pane
 
-class VisualView(val grid : VisualGrid, val visual : Visual, val x : Int, val y : Int) : EmptyView() {
+class VisualView(val grid : VisualGrid, val visual : Visual, val x : Int, val y : Int) : BaseView() {
     val onVisualSelected = Event<Visual>()
+
+    val label = Label("Empty")
 
     init {
         visual.name.onChanged += {
@@ -19,5 +20,7 @@ class VisualView(val grid : VisualGrid, val visual : Visual, val x : Int, val y 
             println("play clip")
             grid.play(x, y)
         }
+
+        children.add(label)
     }
 }
