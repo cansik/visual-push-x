@@ -140,7 +140,7 @@ class PrimaryView {
         val testVisual = GLVisual(this.sketch, Paths.get("data/eye.mp4"))
         testVisual.playType.value = PlayType.LOOP
         testVisual.effects.add(InvertEffect())
-        testVisual.blendMode.value = BlendMode.ADD
+        //testVisual.blendMode.value = BlendMode.ADD
 
         project.value.grid.add(testVisual, 0, 0)
     }

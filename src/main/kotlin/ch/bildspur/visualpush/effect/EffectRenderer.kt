@@ -26,13 +26,15 @@ class EffectRenderer(private val applet : PApplet, private val width : Int, priv
     {
         buffer.draw {
             clearBuffer()
-            it.image(visual.frame, 0f, 0f)
         }
 
         // apply effects
+        val builder = fx.render(visual.frame)
         visual.effects.forEach {
-            it.apply(fx, buffer)
+            it.apply(builder, buffer)
         }
+
+        builder.compose(buffer)
 
         return buffer
     }
