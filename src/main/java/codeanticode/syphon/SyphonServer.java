@@ -33,7 +33,7 @@ import processing.opengl.*;
 import jsyphon.*;
 
 /**
- * Syphon server class. It broadcasts the textures encapsulated in 
+ * Syphon server class. It broadcasts the textures encapsulated in
  * PImage objects.
  *
  */
@@ -47,7 +47,7 @@ public class SyphonServer {
      * Constructor that sets server with specified name.
      *
      * @param parent
-     * @param serverName
+     * @param name
      */
     public SyphonServer(PApplet parent, String name) {
         this.parent = parent;
@@ -57,12 +57,13 @@ public class SyphonServer {
         parent.registerMethod("dispose", this);
     }
 
+
     /**
-     * Starts the underlying JSyphon server.
+     * Initialises the underlying JSyphon server.
      * The server needs to be created after setup
      * and all the JOGL initialization has taken place.
      */
-    public void start() {
+    public void init() {
         if (server == null) {
             server = new JSyphonServer();
             server.initWithName(serverName);
@@ -105,8 +106,9 @@ public class SyphonServer {
      * @return boolean
      */
     public boolean hasClients() {
+        // lazy init server
         if (server == null)
-            return false;
+            init();
 
         return server.hasClients();
     }
@@ -114,7 +116,7 @@ public class SyphonServer {
 
     /**
      * Sends the source image to the bound client
-     * and lazy initialises the JSyphon sever.
+     * and lazy initialises the JSyphon server.
      *
      * @param source
      */
@@ -124,12 +126,14 @@ public class SyphonServer {
             return;
         }
 
+        // lazy init server
+        if (server == null) {
+            init();
+        }
+
+        // send frame if texture is available
         Texture tex = pg.getTexture(source);
         if (tex != null) {
-            if (server == null) {
-                start();
-            }
-
             server.publishFrameTexture(tex.glName, tex.glTarget,
                     0, 0, tex.glWidth, tex.glHeight,
                     tex.glWidth, tex.glHeight, false);
@@ -156,6 +160,7 @@ public class SyphonServer {
      */
     public void stop() {
         server.stop();
+        server = null;
     }
 }
 

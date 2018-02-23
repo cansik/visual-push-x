@@ -11,7 +11,7 @@ class SyphonController(private val sketch: PApplet)
 
     fun setup() {
         server = SyphonServer(sketch, Sketch.NAME)
-        server.start()
+        server.init()
     }
 
     fun sendScreen() {
