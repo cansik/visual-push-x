@@ -20,7 +20,7 @@ class Project {
 
     @Expose
     @BooleanParameter("High FPS Mode*")
-    var highFPSMode = DataModel(false)
+    var highFPSMode = DataModel(true)
 
     @Expose
     @BooleanParameter("Fullscreen Mode*")
