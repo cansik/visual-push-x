@@ -1,17 +1,20 @@
 package ch.bildspur.visualpush.visual
 
-import ch.bildspur.visualpush.visual.types.PlayType
+import ch.bildspur.visualpush.visual.types.PlayMode
 import com.google.gson.annotations.Expose
 import processing.core.PApplet
 import processing.core.PImage
 import processing.video.Movie
 import java.nio.file.Path
 
-class GLVisual(private val applet: PApplet, @Expose val path : Path) : Visual() {
+class GLVisual() : Visual() {
     private lateinit var movie: Movie
 
     private lateinit var actualPreview: PImage
     private lateinit var actualFrame: PImage
+
+    @Expose
+    lateinit var path : Path
 
     override val previewImage: PImage
         get() = actualPreview
@@ -19,7 +22,13 @@ class GLVisual(private val applet: PApplet, @Expose val path : Path) : Visual() 
     override val frame: PImage
         get() = actualFrame
 
-    override fun init() {
+    constructor(path : Path) : this() {
+        this.path = path
+    }
+
+    override fun init(applet: PApplet) {
+        super.init(applet)
+
         movie = Movie(applet, path.toString())
         actualFrame = movie
 
@@ -33,9 +42,9 @@ class GLVisual(private val applet: PApplet, @Expose val path : Path) : Visual() 
     override fun play() {
         super.play()
         when (this.playType.value) {
-            PlayType.LOOP -> movie.loop()
-            PlayType.ONE_SHOT -> movie.play()
-            PlayType.HOLD -> movie.play()
+            PlayMode.LOOP -> movie.loop()
+            PlayMode.ONE_SHOT -> movie.play()
+            PlayMode.HOLD -> movie.play()
         }
     }
 

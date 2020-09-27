@@ -264,7 +264,7 @@ class Sketch : PApplet() {
             scheduler.setup()
             timer.setup()
 
-            initialiseClips()
+            initialiseVisuals()
 
             prepareExitHandler()
 
@@ -278,9 +278,9 @@ class Sketch : PApplet() {
         return false
     }
 
-    fun initialiseClips()
+    fun initialiseVisuals()
     {
-        project.value.grid.forEach { it.init() }
+        project.value.grid.forEach { it.init(this) }
     }
 
     fun drawFPS(pg: PGraphics) {

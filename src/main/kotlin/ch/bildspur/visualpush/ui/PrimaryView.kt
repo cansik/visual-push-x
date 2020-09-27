@@ -12,7 +12,7 @@ import ch.bildspur.visualpush.ui.control.grid.EmptyView
 import ch.bildspur.visualpush.ui.control.grid.VisualView
 import ch.bildspur.visualpush.ui.util.UITask
 import ch.bildspur.visualpush.visual.GLVisual
-import ch.bildspur.visualpush.visual.types.PlayType
+import ch.bildspur.visualpush.visual.types.PlayMode
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.Label
@@ -136,8 +136,8 @@ class PrimaryView {
         sketch.run()
 
         // add test data
-        val testVisual = GLVisual(this.sketch, Paths.get("data/eye.mp4"))
-        testVisual.playType.value = PlayType.LOOP
+        val testVisual = GLVisual(Paths.get("data/eye.mp4"))
+        testVisual.playType.value = PlayMode.LOOP
         testVisual.effects.add(InvertEffect())
         //testVisual.blendMode.value = BlendMode.ADD
 
@@ -209,6 +209,8 @@ class PrimaryView {
                 configuration.saveData(Paths.get(appConfig.projectFile), project.value)
                 configuration.saveAppConfig(appConfig)
             }, { updateUI() }, "save project")
+        } else {
+            saveProjectAs(e)
         }
     }
 

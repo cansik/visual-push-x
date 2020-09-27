@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.stage.Stage
+import kotlin.system.exitProcess
 
 /**
  * Created by cansik on 04.02.17.
@@ -30,7 +31,7 @@ class Main : Application() {
         primaryStage.setOnShown { controller.setupView() }
         primaryStage.setOnCloseRequest {
             controller.sketch.stop()
-            System.exit(0)
+            exitProcess(0)
         }
 
         primaryStage.show()

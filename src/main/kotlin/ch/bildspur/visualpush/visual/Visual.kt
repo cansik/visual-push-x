@@ -1,17 +1,20 @@
 package ch.bildspur.visualpush.visual
 
 import ch.bildspur.model.DataModel
-import ch.bildspur.ui.properties.BooleanParameter
 import ch.bildspur.ui.properties.EnumParameter
 import ch.bildspur.ui.properties.NumberParameter
 import ch.bildspur.ui.properties.StringParameter
 import ch.bildspur.visualpush.effect.VisualEffect
 import ch.bildspur.visualpush.visual.types.BlendMode
-import ch.bildspur.visualpush.visual.types.PlayType
+import ch.bildspur.visualpush.visual.types.PlayMode
+import ch.bildspur.visualpush.visual.types.VisualType
 import com.google.gson.annotations.Expose
+import processing.core.PApplet
 import processing.core.PImage
 
 abstract class Visual {
+    lateinit var applet : PApplet
+
     @Expose
     @NumberParameter("Z-Index")
     val zIndex = DataModel(0)
@@ -22,7 +25,7 @@ abstract class Visual {
 
     @Expose
     @EnumParameter("Play Mode")
-    val playType = DataModel(PlayType.LOOP)
+    val playType = DataModel(PlayMode.LOOP)
 
     @Expose
     @EnumParameter("Blend Mode")
@@ -33,6 +36,9 @@ abstract class Visual {
     @Expose
     val effects = mutableListOf<VisualEffect>()
 
+    @Expose
+    protected var visualType = VisualType.VIDEO
+
     abstract val previewImage : PImage
 
     abstract val frame : PImage
@@ -40,7 +46,9 @@ abstract class Visual {
     /**
      * Loads the visual resources.
      */
-    abstract fun init()
+    open fun init(applet : PApplet) {
+        this.applet = applet
+    }
 
     /**
      * Updates every frame.
