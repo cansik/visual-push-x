@@ -33,7 +33,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     // bildspur libs
-    implementation "com.github.cansik:bildspur-base:7436a637a5"
+    implementation "com.github.cansik:bildspur-base:7a2701c0c6"
     implementation 'com.github.cansik:bildspur-ui:fdbba863da'
 
     // processing
