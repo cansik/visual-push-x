@@ -6,6 +6,7 @@ import processing.core.PApplet
 import processing.core.PImage
 import processing.video.Movie
 import java.nio.file.Path
+import java.nio.file.Paths
 
 class GLVisual() : Visual() {
     private lateinit var movie: Movie

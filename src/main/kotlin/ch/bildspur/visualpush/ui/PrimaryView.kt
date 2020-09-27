@@ -5,7 +5,7 @@ import ch.bildspur.model.DataModel
 import ch.bildspur.ui.fx.PropertiesControl
 import ch.bildspur.visualpush.Sketch
 import ch.bildspur.visualpush.configuration.PathTypeAdapter
-import ch.bildspur.visualpush.configuration.VisualInstanceCreator
+import ch.bildspur.visualpush.configuration.VisualTypeAdapter
 import ch.bildspur.visualpush.effect.InvertEffect
 import ch.bildspur.visualpush.model.AppConfig
 import ch.bildspur.visualpush.model.Project
@@ -41,7 +41,7 @@ class PrimaryView {
 
     val configuration = ConfigurationController(Sketch.NAME, "bildspur", Sketch.URI,
             GsonBuilder().registerTypeHierarchyAdapter(Path::class.java, PathTypeAdapter())
-                    .registerTypeHierarchyAdapter(Visual::class.java, VisualInstanceCreator())
+                    .registerTypeAdapter(Visual::class.java, VisualTypeAdapter())
     )
 
     val propertiesControl = PropertiesControl()

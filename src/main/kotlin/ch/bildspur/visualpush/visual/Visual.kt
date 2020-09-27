@@ -36,7 +36,7 @@ abstract class Visual {
 
     val isPlaying = DataModel(false)
 
-    @Expose
+    //@Expose
     val effects = mutableListOf<VisualEffect>()
 
     abstract val previewImage : PImage
