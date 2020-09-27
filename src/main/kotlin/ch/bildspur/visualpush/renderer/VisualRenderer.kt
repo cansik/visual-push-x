@@ -1,13 +1,11 @@
 package ch.bildspur.visualpush.renderer
 
-import ch.bildspur.visualpush.controller.timer.TimerTask
+import ch.bildspur.timer.TimerTask
 import ch.bildspur.visualpush.effect.EffectRenderer
 import ch.bildspur.visualpush.model.Project
 import ch.bildspur.visualpush.util.draw
 import ch.bildspur.visualpush.visual.Visual
 import ch.bildspur.visualpush.visual.VisualScheduler
-import processing.core.PApplet
-import processing.core.PConstants.P2D
 import processing.core.PGraphics
 
 class VisualRenderer(private val ctx: PGraphics,

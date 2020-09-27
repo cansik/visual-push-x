@@ -1,12 +1,12 @@
 package ch.bildspur.visualpush
 
 import ch.bildspur.model.DataModel
-import ch.bildspur.visualpush.controller.timer.Timer
-import ch.bildspur.visualpush.controller.timer.TimerTask
 import ch.bildspur.visualpush.model.Project
 import ch.bildspur.visualpush.renderer.IRenderer
 import ch.bildspur.visualpush.renderer.VisualRenderer
 import ch.bildspur.postfx.builder.PostFX
+import ch.bildspur.timer.Timer
+import ch.bildspur.timer.TimerTask
 import ch.bildspur.visualpush.controller.SyphonController
 import ch.bildspur.visualpush.effect.EffectRenderer
 import ch.bildspur.visualpush.util.*
