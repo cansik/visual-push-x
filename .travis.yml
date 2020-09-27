@@ -4,10 +4,10 @@ language: java
 
 # command to build
 install:
-  - "gradle assemble"
+  - "./gradlew assemble"
 
 # command to run tests
 script:
-  - "gradle check"
+  - "./gradlew check"
 
 after_success:
