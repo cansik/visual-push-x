@@ -1,8 +1,7 @@
 package ch.bildspur.visualpush.ui.control.grid
 
-import ch.bildspur.visualpush.event.Event
+import ch.bildspur.event.Event
 import javafx.scene.control.Label
-import javafx.scene.layout.Pane
 
 class EmptyView : BaseView() {
     val onSelected = Event<EmptyView>()

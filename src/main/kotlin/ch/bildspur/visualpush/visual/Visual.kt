@@ -1,27 +1,33 @@
 package ch.bildspur.visualpush.visual
 
+import ch.bildspur.model.DataModel
+import ch.bildspur.ui.properties.BooleanParameter
+import ch.bildspur.ui.properties.EnumParameter
+import ch.bildspur.ui.properties.NumberParameter
+import ch.bildspur.ui.properties.StringParameter
 import ch.bildspur.visualpush.effect.VisualEffect
-import ch.bildspur.visualpush.model.DataModel
 import ch.bildspur.visualpush.visual.types.BlendMode
 import ch.bildspur.visualpush.visual.types.PlayType
 import com.google.gson.annotations.Expose
-import processing.core.PGraphics
 import processing.core.PImage
 
 abstract class Visual {
     @Expose
+    @NumberParameter("Z-Index")
     val zIndex = DataModel(0)
 
     @Expose
+    @StringParameter("Name")
     val name = DataModel("Visual")
 
     @Expose
+    @EnumParameter("Play Mode")
     val playType = DataModel(PlayType.LOOP)
 
     @Expose
+    @EnumParameter("Blend Mode")
     val blendMode = DataModel(BlendMode.BLEND)
 
-    @Expose
     val isPlaying = DataModel(false)
 
     @Expose

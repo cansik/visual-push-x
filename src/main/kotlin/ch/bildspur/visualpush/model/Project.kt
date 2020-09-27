@@ -1,9 +1,10 @@
 package ch.bildspur.visualpush.model
 
+import ch.bildspur.model.DataModel
+import ch.bildspur.ui.properties.BooleanParameter
+import ch.bildspur.ui.properties.NumberParameter
+import ch.bildspur.ui.properties.StringParameter
 import ch.bildspur.visualpush.Sketch
-import ch.bildspur.visualpush.ui.properties.BooleanParameter
-import ch.bildspur.visualpush.ui.properties.IntParameter
-import ch.bildspur.visualpush.ui.properties.StringParameter
 import com.google.gson.annotations.Expose
 
 /**
@@ -27,15 +28,15 @@ class Project {
     var isFullScreenMode = DataModel(false)
 
     @Expose
-    @IntParameter("Fullscreen Display*")
+    @NumberParameter("Fullscreen Display*")
     var fullScreenDisplay = DataModel(0)
 
     @Expose
-    @IntParameter("Output Width")
+    @NumberParameter("Output Width", "px")
     var outputWidth = DataModel(1280)
 
     @Expose
-    @IntParameter("Output Height")
+    @NumberParameter("Output Height", "px")
     var outputHeight = DataModel(720)
 
     @Expose

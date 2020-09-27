@@ -1,18 +1,17 @@
 package ch.bildspur.visualpush.ui
 
+import ch.bildspur.configuration.ConfigurationController
+import ch.bildspur.model.DataModel
+import ch.bildspur.ui.fx.PropertiesControl
 import ch.bildspur.visualpush.Sketch
-import ch.bildspur.visualpush.configuration.ConfigurationController
 import ch.bildspur.visualpush.effect.InvertEffect
 import ch.bildspur.visualpush.model.AppConfig
-import ch.bildspur.visualpush.model.DataModel
 import ch.bildspur.visualpush.model.Project
 import ch.bildspur.visualpush.model.visual.VisualGrid
 import ch.bildspur.visualpush.ui.control.grid.EmptyView
 import ch.bildspur.visualpush.ui.control.grid.VisualView
-import ch.bildspur.visualpush.ui.properties.PropertiesControl
 import ch.bildspur.visualpush.ui.util.UITask
 import ch.bildspur.visualpush.visual.GLVisual
-import ch.bildspur.visualpush.visual.types.BlendMode
 import ch.bildspur.visualpush.visual.types.PlayType
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
@@ -35,7 +34,7 @@ class PrimaryView {
     @FXML
     lateinit var root: BorderPane
 
-    val configuration = ConfigurationController()
+    val configuration = ConfigurationController(Sketch.NAME, "bildspur", Sketch.URI)
 
     val propertiesControl = PropertiesControl()
 
@@ -89,7 +88,7 @@ class PrimaryView {
 
             // create or load configuration
             if (Files.exists(Paths.get(appConfig.projectFile)) && !Files.isDirectory(Paths.get(appConfig.projectFile)))
-                project.value = configuration.loadProject(appConfig.projectFile)
+                project.value = configuration.loadData(Paths.get(appConfig.projectFile))
             else
                 project.value = Project()
 
@@ -170,7 +169,7 @@ class PrimaryView {
 
         if (result != null) {
             UITask.run({
-                project.value = configuration.loadProject(result.path)
+                project.value = configuration.loadData(result.toPath())
                 appConfig.projectFile = result.path
                 configuration.saveAppConfig(appConfig)
 
@@ -197,7 +196,7 @@ class PrimaryView {
 
         if (result != null) {
             UITask.run({
-                configuration.saveProject(result.path, project.value)
+                configuration.saveData(result.toPath(), project.value)
                 appConfig.projectFile = result.path
                 configuration.saveAppConfig(appConfig)
             }, { updateUI() }, "save project")
@@ -207,7 +206,7 @@ class PrimaryView {
     fun saveProject(e: ActionEvent) {
         if (Files.exists(Paths.get(appConfig.projectFile)) && !Files.isDirectory(Paths.get(appConfig.projectFile))) {
             UITask.run({
-                configuration.saveProject(appConfig.projectFile, project.value)
+                configuration.saveData(Paths.get(appConfig.projectFile), project.value)
                 configuration.saveAppConfig(appConfig)
             }, { updateUI() }, "save project")
         }

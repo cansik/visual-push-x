@@ -1,8 +1,8 @@
 package ch.bildspur.visualpush
 
+import ch.bildspur.model.DataModel
 import ch.bildspur.visualpush.controller.timer.Timer
 import ch.bildspur.visualpush.controller.timer.TimerTask
-import ch.bildspur.visualpush.model.DataModel
 import ch.bildspur.visualpush.model.Project
 import ch.bildspur.visualpush.renderer.IRenderer
 import ch.bildspur.visualpush.renderer.VisualRenderer
@@ -46,6 +46,9 @@ class Sketch : PApplet() {
 
         @JvmStatic
         val VERSION = "0.1"
+
+        @JvmStatic
+        val URI = "visual-push-x"
 
         @JvmStatic lateinit var instance: PApplet
 

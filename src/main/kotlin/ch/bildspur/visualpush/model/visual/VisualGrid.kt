@@ -1,7 +1,7 @@
 package ch.bildspur.visualpush.model.visual
 
-import ch.bildspur.visualpush.event.Event
-import ch.bildspur.visualpush.model.DataModel
+import ch.bildspur.event.Event
+import ch.bildspur.model.DataModel
 import ch.bildspur.visualpush.visual.Visual
 
 interface VisualGrid : Iterable<Visual> {

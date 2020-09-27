@@ -1,6 +1,6 @@
 package ch.bildspur.visualpush.ui.control.grid
 
-import ch.bildspur.visualpush.event.Event
+import ch.bildspur.event.Event
 import ch.bildspur.visualpush.model.visual.VisualGrid
 import ch.bildspur.visualpush.visual.Visual
 import javafx.scene.control.Label
