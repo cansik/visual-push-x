@@ -5,6 +5,7 @@ import ch.bildspur.model.DataModel
 import ch.bildspur.ui.fx.PropertiesControl
 import ch.bildspur.visualpush.Sketch
 import ch.bildspur.visualpush.configuration.PathTypeAdapter
+import ch.bildspur.visualpush.configuration.VisualInstanceCreator
 import ch.bildspur.visualpush.effect.InvertEffect
 import ch.bildspur.visualpush.model.AppConfig
 import ch.bildspur.visualpush.model.Project
@@ -13,6 +14,7 @@ import ch.bildspur.visualpush.ui.control.grid.EmptyView
 import ch.bildspur.visualpush.ui.control.grid.VisualView
 import ch.bildspur.visualpush.ui.util.UITask
 import ch.bildspur.visualpush.visual.GLVisual
+import ch.bildspur.visualpush.visual.Visual
 import ch.bildspur.visualpush.visual.types.PlayMode
 import com.google.gson.GsonBuilder
 import javafx.event.ActionEvent
@@ -38,7 +40,8 @@ class PrimaryView {
     lateinit var root: BorderPane
 
     val configuration = ConfigurationController(Sketch.NAME, "bildspur", Sketch.URI,
-        GsonBuilder().registerTypeHierarchyAdapter(Path::class.java, PathTypeAdapter())
+            GsonBuilder().registerTypeHierarchyAdapter(Path::class.java, PathTypeAdapter())
+                    .registerTypeHierarchyAdapter(Visual::class.java, VisualInstanceCreator())
     )
 
     val propertiesControl = PropertiesControl()
@@ -66,7 +69,7 @@ class PrimaryView {
 
     private val appIcon = Image(javaClass.getResourceAsStream("images/icon.png"))
 
-    private lateinit var grid : VisualGrid
+    private lateinit var grid: VisualGrid
 
     init {
     }

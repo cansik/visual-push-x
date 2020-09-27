@@ -16,6 +16,9 @@ abstract class Visual {
     lateinit var applet : PApplet
 
     @Expose
+    protected var visualType = VisualType.VIDEO
+
+    @Expose
     @NumberParameter("Z-Index")
     val zIndex = DataModel(0)
 
@@ -35,9 +38,6 @@ abstract class Visual {
 
     @Expose
     val effects = mutableListOf<VisualEffect>()
-
-    @Expose
-    protected var visualType = VisualType.VIDEO
 
     abstract val previewImage : PImage
 
