@@ -5,6 +5,9 @@ import ch.bildspur.model.DataModel
 import ch.bildspur.visualpush.visual.Visual
 
 interface VisualGrid : Iterable<Visual> {
+    val onVisualActionStarted : Event<VisualEvent>
+    val onVisualActionEnded  : Event<VisualEvent>
+
     val onVisualPlayed : Event<VisualEvent>
     val onVisualPaused : Event<VisualEvent>
     val onVisualStopped : Event<VisualEvent>
@@ -14,6 +17,9 @@ interface VisualGrid : Iterable<Visual> {
 
     val width : DataModel<Int>
     val height : DataModel<Int>
+
+    fun actionStarted(x : Int, y: Int)
+    fun actionEnded(x : Int, y: Int)
 
     fun play(x: Int, y: Int)
     fun pause(x: Int, y: Int)

@@ -192,6 +192,14 @@ class Sketch : PApplet() {
     }
 
     fun setupHooks() {
+        project.value.grid.onVisualActionStarted += {
+            scheduler.actionStarted(it.visual)
+        }
+
+        project.value.grid.onVisualActionEnded += {
+            scheduler.actionEnded(it.visual)
+        }
+
         project.value.grid.onVisualPlayed += {
             scheduler.play(it.visual)
         }

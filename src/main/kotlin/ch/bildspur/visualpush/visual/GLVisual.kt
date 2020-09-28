@@ -6,7 +6,6 @@ import processing.core.PApplet
 import processing.core.PImage
 import processing.video.Movie
 import java.nio.file.Path
-import java.nio.file.Paths
 
 class GLVisual() : Visual() {
     private lateinit var movie: Movie
@@ -42,10 +41,10 @@ class GLVisual() : Visual() {
 
     override fun play() {
         super.play()
-        when (this.playType.value) {
-            PlayMode.LOOP -> movie.loop()
-            PlayMode.ONE_SHOT -> movie.play()
-            PlayMode.HOLD -> movie.play()
+        when (this.playMode.value) {
+            PlayMode.Loop -> movie.loop()
+            PlayMode.OneShot -> movie.play()
+            PlayMode.Hold -> movie.play()
         }
     }
 
@@ -65,22 +64,15 @@ class GLVisual() : Visual() {
 
     private fun generatePreview() {
         // todo: fix preview generation
-        saveRead()
         movie.play()
         saveRead()
         println(movie.duration())
         movie.jump(movie.duration() / 2f)
-        saveRead()
-        saveRead()
         actualPreview = movie.copy()
         stop()
     }
 
     private fun saveRead() {
-        try {
-            movie.read()
-        } catch (ex: Exception) {
-            error("Movie Read Ex: ${ex.message}")
-        }
+        movie.read()
     }
 }

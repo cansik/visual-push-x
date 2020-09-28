@@ -28,7 +28,7 @@ abstract class Visual {
 
     @Expose
     @EnumParameter("Play Mode")
-    val playType = DataModel(PlayMode.LOOP)
+    val playMode = DataModel(PlayMode.Loop)
 
     @Expose
     @EnumParameter("Blend Mode")

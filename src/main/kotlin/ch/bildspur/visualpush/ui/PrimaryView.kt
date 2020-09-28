@@ -145,7 +145,7 @@ class PrimaryView {
 
         // add test data
         val testVisual = GLVisual(Paths.get("data/eye.mp4"))
-        testVisual.playType.value = PlayMode.LOOP
+        testVisual.playMode.value = PlayMode.Loop
         testVisual.effects.add(InvertEffect())
         //testVisual.blendMode.value = BlendMode.ADD
 

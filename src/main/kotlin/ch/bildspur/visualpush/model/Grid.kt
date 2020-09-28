@@ -8,6 +8,9 @@ import ch.bildspur.visualpush.visual.Visual
 import com.google.gson.annotations.Expose
 
 class Grid : VisualGrid {
+    override val onVisualActionStarted = Event<VisualEvent>()
+    override val onVisualActionEnded = Event<VisualEvent>()
+
     override val onVisualPlayed = Event<VisualEvent>()
     override val onVisualPaused = Event<VisualEvent>()
     override val onVisualStopped = Event<VisualEvent>()
@@ -35,12 +38,23 @@ class Grid : VisualGrid {
         width.fire()
     }
 
+    override fun actionStarted(x: Int, y: Int) {
+        get(x, y)?.let {
+            onVisualActionStarted(VisualEvent(it, x, y))
+        }
+    }
+
+    override fun actionEnded(x: Int, y: Int) {
+        get(x, y)?.let {
+            onVisualActionEnded(VisualEvent(it, x, y))
+        }
+    }
+
     override fun play(x: Int, y: Int) {
         get(x, y)?.let {
             onVisualPlayed(VisualEvent(it, x, y))
         }
     }
-
 
     override fun pause(x: Int, y: Int) {
         get(x, y)?.let {

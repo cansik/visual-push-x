@@ -16,9 +16,12 @@ class VisualView(val grid : VisualGrid, val visual : Visual, val x : Int, val y 
         }
         visual.name.fireLatest()
 
-        setOnMouseClicked {
-            println("play clip")
-            grid.play(x, y)
+        setOnMousePressed {
+            grid.actionStarted(x, y)
+        }
+
+        setOnMouseReleased {
+            grid.actionEnded(x, y)
         }
 
         children.add(label)

@@ -15,14 +15,28 @@ class VisualScheduler {
         visuals.forEach{ it.update() }
     }
 
-    fun play(visual: Visual)
+    fun actionStarted(visual: Visual)
     {
+        // apply play strategy
+        visual.playMode.value.startActionStrategy(this, visual)
+    }
+
+    fun actionEnded(visual: Visual)
+    {
+        // apply play strategy
+        visual.playMode.value.endActionStrategy(this, visual)
+    }
+
+    fun play(visual: Visual) {
         visual.play()
         visuals.add(visual)
     }
 
-    fun pause(visual: Visual) {
+    fun pause(visual: Visual, hide: Boolean = false) {
         visual.pause()
+
+        if(hide)
+            visuals.remove(visual)
     }
 
     fun stop(visual: Visual)
