@@ -25,10 +25,10 @@ enum class PlayMode(inline val startActionStrategy: (scheduler: VisualScheduler,
 
     @SerializedName("loop")
     Loop({ s, v ->
-        if (v.isPlaying.value)
-            s.stop(v)
-        else
+        if (v.state.value == VisualState.Ready)
             s.play(v)
+        else
+            s.stop(v)
     }),
 
     @SerializedName("continuous-hold")

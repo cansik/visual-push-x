@@ -89,7 +89,7 @@ class Sketch : PApplet() {
 
     lateinit var fx: PostFX
 
-    val scheduler = VisualScheduler()
+    val scheduler = VisualScheduler(project)
 
     init {
     }

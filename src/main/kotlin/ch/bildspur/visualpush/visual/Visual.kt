@@ -7,6 +7,7 @@ import ch.bildspur.ui.properties.StringParameter
 import ch.bildspur.visualpush.effect.VisualEffect
 import ch.bildspur.visualpush.visual.types.BlendMode
 import ch.bildspur.visualpush.visual.types.PlayMode
+import ch.bildspur.visualpush.visual.types.VisualState
 import ch.bildspur.visualpush.visual.types.VisualType
 import com.google.gson.annotations.Expose
 import processing.core.PApplet
@@ -34,7 +35,7 @@ abstract class Visual {
     @EnumParameter("Blend Mode")
     val blendMode = DataModel(BlendMode.BLEND)
 
-    val isPlaying = DataModel(false)
+    val state = DataModel(VisualState.Ready)
 
     //@Expose
     val effects = mutableListOf<VisualEffect>()
@@ -60,7 +61,7 @@ abstract class Visual {
      */
     open fun play()
     {
-        isPlaying.value = true
+        state.value = VisualState.Playing
     }
 
     /**
@@ -68,7 +69,7 @@ abstract class Visual {
      */
     open fun pause()
     {
-        isPlaying.value = false
+        state.value = VisualState.Paused
     }
 
     /**
@@ -79,7 +80,9 @@ abstract class Visual {
     /**
      * Diposes the visual resources.
      */
-    abstract fun dispose()
+    open fun dispose() {
+        state.value = VisualState.Disposed
+    }
 
     /**
      * Pauses and resets the visual.
@@ -87,5 +90,7 @@ abstract class Visual {
     fun stop() {
         pause()
         reset()
+
+        state.value = VisualState.Ready
     }
 }

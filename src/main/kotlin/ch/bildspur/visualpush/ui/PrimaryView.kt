@@ -133,7 +133,7 @@ class PrimaryView {
         }
     }
 
-    fun startProcessing() {
+    private fun startProcessing() {
         sketch = Sketch()
 
         project.onChanged += {
@@ -147,14 +147,14 @@ class PrimaryView {
         // add test data
         // todo: remove this before release
         val testVisual = GLVisual(Paths.get("data/eye.mp4"))
-        testVisual.playMode.value = PlayMode.ContinuousHold
+        testVisual.playMode.value = PlayMode.OneShot
         testVisual.effects.add(InvertEffect())
         testVisual.blendMode.value = BlendMode.ADD
 
         project.value.grid.add(testVisual, 0, 0)
     }
 
-    fun updateUI() {
+    private fun updateUI() {
     }
 
     fun newProject(e: ActionEvent) {

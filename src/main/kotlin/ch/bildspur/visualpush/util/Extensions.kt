@@ -3,21 +3,24 @@ package ch.bildspur.visualpush.util
 import processing.core.*
 import processing.core.PConstants.QUAD_STRIP
 import java.util.*
+import kotlin.math.abs
+import kotlin.math.max
+import kotlin.math.min
 
 
 /**
  * Created by cansik on 04.02.17.
  */
-fun Double.format(digits: Int) = java.lang.String.format("%.${digits}f", this)
+fun Double.format(digits: Int): String = java.lang.String.format("%.${digits}f", this)
 
-fun Float.format(digits: Int) = java.lang.String.format("%.${digits}f", this)
+fun Float.format(digits: Int): String = java.lang.String.format("%.${digits}f", this)
 
-fun Float.isApproximate(value: Double, error: Double): Boolean {
-    return (Math.abs(Math.abs(this) - Math.abs(value)) < error)
+fun Float.isApproximate(value: Float, error: Float = 0.00001f): Boolean {
+    return (abs(abs(this) - abs(value)) < error)
 }
 
 fun Float.limit(min: Float, max: Float): Float {
-    return Math.max(Math.min(max, this), min)
+    return max(min(max, this), min)
 }
 
 fun Boolean.toFloat(): Float {

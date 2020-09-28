@@ -1,6 +1,8 @@
 package ch.bildspur.visualpush.visual
 
+import ch.bildspur.visualpush.util.isApproximate
 import ch.bildspur.visualpush.visual.types.PlayMode
+import ch.bildspur.visualpush.visual.types.VisualState
 import com.google.gson.annotations.Expose
 import processing.core.PApplet
 import processing.core.PImage
@@ -22,6 +24,9 @@ class GLVisual() : Visual() {
     override val frame: PImage
         get() = actualFrame
 
+    val hasEnded : Boolean
+        get() = movie.time().isApproximate(movie.duration())
+
     constructor(path : Path) : this() {
         this.path = path
     }
@@ -37,6 +42,14 @@ class GLVisual() : Visual() {
 
     override fun update() {
         saveRead()
+
+        // check if movie finished
+        if(hasEnded) {
+            when(playMode.value) {
+                PlayMode.Loop -> Unit
+                else -> state.value = VisualState.Ready
+            }
+        }
     }
 
     override fun play() {
