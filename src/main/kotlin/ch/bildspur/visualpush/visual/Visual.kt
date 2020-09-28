@@ -38,9 +38,10 @@ abstract class Visual {
     val state = DataModel(VisualState.Ready)
 
     //@Expose
+    // todo: check how it should work with the visual effects
     val effects = mutableListOf<VisualEffect>()
 
-    abstract val previewImage : PImage
+    val preview = DataModel(PImage(100, 100))
 
     abstract val frame : PImage
 

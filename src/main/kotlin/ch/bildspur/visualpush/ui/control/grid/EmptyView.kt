@@ -9,9 +9,6 @@ class EmptyView : BaseView() {
     val label = Label("Empty")
 
     init {
-        width = 80.0
-        height = 30.0
-
         children.add(label)
     }
 }

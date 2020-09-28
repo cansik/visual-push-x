@@ -114,7 +114,7 @@ class Sketch : PApplet() {
     }
 
     override fun setup() {
-        Sketch.instance = this
+        instance = this
 
         aimedFPS = if (project.value.highFPSMode.value) HIGH_RES_FRAME_RATE else LOW_RES_FRAME_RATE
         frameRate(aimedFPS)

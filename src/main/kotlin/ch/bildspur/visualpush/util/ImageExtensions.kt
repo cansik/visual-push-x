@@ -1,5 +1,8 @@
 package ch.bildspur.visualpush.util
 
+import javafx.scene.image.Image
+import javafx.scene.image.PixelFormat
+import javafx.scene.image.WritableImage
 import processing.core.PGraphics
 import processing.core.PImage
 
@@ -19,4 +22,12 @@ fun PGraphics.centerImage(img: PImage) {
 
 fun  PGraphics.centerImage(img: PImage, width: Float, height: Float) {
     this.image(img, this.width / 2.0f - width / 2.0f, this.height / 2.0f - height / 2.0f, width, height)
+}
+
+fun PImage.toImage() : Image {
+    val pixels = this.pixels
+    val img = WritableImage(width, height)
+    val format = PixelFormat.getIntArgbInstance()
+    img.pixelWriter.setPixels(0, 0, width, height, format, pixels, 0, width)
+    return img
 }

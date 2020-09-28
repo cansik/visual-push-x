@@ -1,5 +1,6 @@
 package ch.bildspur.visualpush.visual
 
+import ch.bildspur.visualpush.Sketch
 import ch.bildspur.visualpush.util.isApproximate
 import ch.bildspur.visualpush.visual.types.PlayMode
 import ch.bildspur.visualpush.visual.types.VisualState
@@ -11,15 +12,10 @@ import java.nio.file.Path
 
 class GLVisual() : Visual() {
     private lateinit var movie: Movie
-
-    private lateinit var actualPreview: PImage
     private lateinit var actualFrame: PImage
 
     @Expose
     lateinit var path : Path
-
-    override val previewImage: PImage
-        get() = actualPreview
 
     override val frame: PImage
         get() = actualFrame
@@ -37,7 +33,7 @@ class GLVisual() : Visual() {
         movie = Movie(applet, path.toString())
         actualFrame = movie
 
-        //generatePreview()
+        generatePreview()
     }
 
     override fun update() {
@@ -78,10 +74,12 @@ class GLVisual() : Visual() {
         // todo: fix preview generation
         movie.play()
         saveRead()
-        println(movie.duration())
         movie.jump(movie.duration() / 2f)
-        actualPreview = movie.copy()
-        stop()
+        saveRead()
+        movie.loadPixels()
+        movie.updatePixels()
+        preview.value = movie.copy()
+        movie.stop()
     }
 
     private fun saveRead() {

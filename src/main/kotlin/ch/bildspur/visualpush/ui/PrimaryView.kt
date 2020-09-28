@@ -20,6 +20,8 @@ import ch.bildspur.visualpush.visual.types.PlayMode
 import com.google.gson.GsonBuilder
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
+import javafx.geometry.Insets
+import javafx.scene.Cursor
 import javafx.scene.control.Label
 import javafx.scene.control.ProgressIndicator
 import javafx.scene.control.TitledPane
@@ -120,6 +122,11 @@ class PrimaryView {
 
     fun setupGrid() {
         gridPane.children.clear()
+        gridPane.padding = Insets(5.0)
+        gridPane.hgap = 5.0
+        gridPane.vgap = 5.0
+        gridPane.cursor = Cursor.DEFAULT
+
         for (y in 0 until project.value.grid.height.value) {
             for (x in 0 until project.value.grid.width.value) {
                 val visual = project.value.grid.get(x, y)

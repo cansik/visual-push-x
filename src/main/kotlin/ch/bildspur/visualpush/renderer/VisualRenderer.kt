@@ -22,7 +22,7 @@ class VisualRenderer(private val ctx: PGraphics,
 
     override fun render() {
         ctx.draw {
-            it.background(55f)
+            it.background(0f)
         }
 
         scheduler.visuals.forEach { renderVisual(it) }
@@ -34,6 +34,7 @@ class VisualRenderer(private val ctx: PGraphics,
 
         ctx.draw {
             it.blendMode(visual.blendMode.value.value)
+            // todo: center / fit image
             it.image(preRendered, 0f, 0f, it.width.toFloat(), it.height.toFloat())
         }
     }
