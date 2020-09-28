@@ -43,8 +43,7 @@ class GLVisual() : Visual() {
         super.play()
         when (this.playMode.value) {
             PlayMode.Loop -> movie.loop()
-            PlayMode.OneShot -> movie.play()
-            PlayMode.Hold -> movie.play()
+            else -> movie.play()
         }
     }
 

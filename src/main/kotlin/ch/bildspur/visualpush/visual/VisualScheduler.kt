@@ -17,13 +17,11 @@ class VisualScheduler {
 
     fun actionStarted(visual: Visual)
     {
-        // apply play strategy
         visual.playMode.value.startActionStrategy(this, visual)
     }
 
     fun actionEnded(visual: Visual)
     {
-        // apply play strategy
         visual.playMode.value.endActionStrategy(this, visual)
     }
 
@@ -35,8 +33,9 @@ class VisualScheduler {
     fun pause(visual: Visual, hide: Boolean = false) {
         visual.pause()
 
-        if(hide)
+        if(hide) {
             visuals.remove(visual)
+        }
     }
 
     fun stop(visual: Visual)

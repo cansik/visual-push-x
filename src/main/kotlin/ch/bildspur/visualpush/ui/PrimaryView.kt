@@ -15,6 +15,7 @@ import ch.bildspur.visualpush.ui.control.grid.VisualView
 import ch.bildspur.visualpush.ui.util.UITask
 import ch.bildspur.visualpush.visual.GLVisual
 import ch.bildspur.visualpush.visual.Visual
+import ch.bildspur.visualpush.visual.types.BlendMode
 import ch.bildspur.visualpush.visual.types.PlayMode
 import com.google.gson.GsonBuilder
 import javafx.event.ActionEvent
@@ -144,10 +145,11 @@ class PrimaryView {
         sketch.run()
 
         // add test data
+        // todo: remove this before release
         val testVisual = GLVisual(Paths.get("data/eye.mp4"))
-        testVisual.playMode.value = PlayMode.Loop
+        testVisual.playMode.value = PlayMode.ContinuousHold
         testVisual.effects.add(InvertEffect())
-        //testVisual.blendMode.value = BlendMode.ADD
+        testVisual.blendMode.value = BlendMode.ADD
 
         project.value.grid.add(testVisual, 0, 0)
     }
