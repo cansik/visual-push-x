@@ -1,6 +1,5 @@
 package ch.bildspur.visualpush.visual
 
-import ch.bildspur.visualpush.Sketch
 import ch.bildspur.visualpush.util.isApproximate
 import ch.bildspur.visualpush.visual.types.PlayMode
 import ch.bildspur.visualpush.visual.types.VisualState
@@ -43,6 +42,7 @@ class GLVisual() : Visual() {
         if(hasEnded) {
             when(playMode.value) {
                 PlayMode.Loop -> Unit
+                PlayMode.ContinuousHold -> Unit
                 else -> state.value = VisualState.Ready
             }
         }
@@ -52,6 +52,7 @@ class GLVisual() : Visual() {
         super.play()
         when (this.playMode.value) {
             PlayMode.Loop -> movie.loop()
+            PlayMode.ContinuousHold -> movie.loop()
             else -> movie.play()
         }
     }

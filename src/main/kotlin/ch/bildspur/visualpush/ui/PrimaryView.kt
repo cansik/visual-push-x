@@ -154,7 +154,7 @@ class PrimaryView {
         // add test data
         // todo: remove this before release
         val testVisual = GLVisual(Paths.get("data/eye.mp4"))
-        testVisual.playMode.value = PlayMode.OneShot
+        testVisual.playMode.value = PlayMode.ContinuousHold
         testVisual.effects.add(InvertEffect())
         testVisual.blendMode.value = BlendMode.ADD
 

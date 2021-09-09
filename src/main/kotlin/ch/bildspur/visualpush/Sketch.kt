@@ -101,7 +101,7 @@ class Sketch : PApplet() {
 
     override fun settings() {
         if (project.value.isFullScreenMode.value)
-            fullScreen(PConstants.P3D, project.value.fullScreenDisplay.value)
+            fullScreen(PConstants.P2D, project.value.fullScreenDisplay.value)
         else
             size(WINDOW_WIDTH, WINDOW_HEIGHT, PConstants.P2D)
 
